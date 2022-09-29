@@ -1,3 +1,5 @@
+#SQS input follows format {"user_id":"user_2","device":"brick","location":"antarctica"}
+
 const AWS = require('aws-sdk');
 
 //initialise dynamoDB client
