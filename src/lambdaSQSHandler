@@ -26,7 +26,6 @@ exports.handler = async (event) => {
               userId : body.user_id,
               userDevice : body.device,
               userLocation : body.location,
-              Name : body.name
           } 
       };
       
