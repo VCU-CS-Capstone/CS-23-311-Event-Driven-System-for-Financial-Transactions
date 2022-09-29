@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  testFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: .
+      Handler: lambda_handler
+      Runtime: python3.9
+      Architectures: 
+        - x86_64
+      Events: 
+        sqsTest:
+          Type: SQS
+          Properties: 
+            Queue: !GetAtt sqsTest.Arn
+  
+  sqsTest:
+    Type: AWS::SQS::Queue
+    
