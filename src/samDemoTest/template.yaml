@@ -2,20 +2,39 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
 Resources:
-  testFunction:
-    Type: AWS::Serverless::Function 
+  LambdaWriteToDynamoDB:
+    # A function that writes to a DynamoDB table on a schedule
+    Type: 'AWS::Serverless::Function'
     Properties:
-      CodeUri: .
-      Handler: lambda_handler
-      Runtime: python3.9
-      Architectures: 
-        - x86_64
-      Events: 
-        sqsTest:
-          Type: SQS
-          Properties: 
-            Queue: !GetAtt sqsTest.Arn
-  
-  sqsTest:
-    Type: AWS::SQS::Queue
-    
+      FunctionName: LambdaWriteToDynamoDB
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      CodeUri: hello_world/
+      Description: A function that writes to a DynamoDB table
+      MemorySize: 128
+      Timeout: 120
+      Policies:
+      # Read more about SAM policy templates here
+      # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
+       - AWSLambdaExecute
+       - DynamoDBCrudPolicy:
+          TableName: !Ref MyDynamoDBTable
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref MyDynamoDBTable
+            
+  MyDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: MyDynamoDBTable
+      KeySchema:
+        - AttributeName: accountId
+          KeyType: HASH
+      AttributeDefinitions:
+        - AttributeName: accountId
+          AttributeType: S
+      BillingMode: PAY_PER_REQUEST
+      ProvisionedThroughput:
+        ReadCapacityUnits: 0
+        WriteCapacityUnits: 0

@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "samTestApp"
+stack_name = "eventSemOneStack"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1o8mj0e61cpta"
-s3_prefix = "samTestApp"
+s3_prefix = "eventSemOneStack"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
