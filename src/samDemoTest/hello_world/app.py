@@ -2,24 +2,10 @@ import json
 import boto3
 import requests
 
-
-def lambda_handler(event, context):
-    
-
-    item = {
-        'accountID': "accountID",
-        'name' : "name",
-        'transaction_type' : "transaction_type",
-        'vendor' : "vendor",
-        'amount' : "amount"
-    }
-    sqs = boto3.client('sqs')
-    
-    sqs.send_message(
-        QueueUrl="https://sqs.us-east-1.amazonaws.com/xxxxxxxxxxxx/current-time",
-        MessageBody = item
-    )
-    return {
-        'statusCode': 200,
-        'body': json.dumps(item)
-    }
+def lambda_handler(event,context):
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('MyDynamoDBTable')
+    input={'accountId': '123457', 'name': 'Parth', 'transactionType': 'food', 'vendor': 'Sevo', 'amount': '12.35'}
+    response = table.put_item(Item = input)
+    print(response)
+    print("hello")
