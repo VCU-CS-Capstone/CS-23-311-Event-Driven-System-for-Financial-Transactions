@@ -5,7 +5,7 @@ import json
 
 def CreateAccount():
   account = {}
-  name = input("What is your name? ");
+  name = input("What is your name?")
   address = input("What is your address? ")
   ssn = input("What is your ssn? ")
   dob = input("what is your dob? ")
