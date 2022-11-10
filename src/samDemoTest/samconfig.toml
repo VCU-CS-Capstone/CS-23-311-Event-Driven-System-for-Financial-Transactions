@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "EventStackOne"
+stack_name = "DemoStack"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1o8mj0e61cpta"
-s3_prefix = "EventStackOne"
+s3_prefix = "DemoStack"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
