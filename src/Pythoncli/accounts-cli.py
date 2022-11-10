@@ -2,21 +2,28 @@ import os
 from stat import SF_SNAPSHOT
 import sys
 import json
+import uuid
+from datetime import date
 
 def CreateAccount():
   account = {}
-  name = input("What is your name?")
-  address = input("What is your address? ")
-  ssn = input("What is your ssn? ")
-  dob = input("what is your dob? ")
-  gender = input("What is your gender")
+  name = input("What is your name? \n")
+  address = input("What is your shipping address? \n")
+  email = input("What is your email? \n")
+  phone = input("What is your phone number?\n")
 
-  account['AccountID'] = '004'
-  account["name"] = name
+  account['id'] = str(uuid.uuid4())
+  account['object'] = 'customer'
   account["address"] = address
-  account["ssn"] = ssn
-  account["dob"] = dob
-  account['gender'] = gender
+  account["balance"] = '0'
+  account["created"] = str(date.today())
+  account["defaultSource"] = ' '
+  account['delinquent'] = 'true'
+  account['description'] = name
+  account['email'] = email
+  account['name'] = name
+  account['phone'] = phone
+  account['shipping'] = address
 
   accountUpdate = json.dumps(account)
   return accountUpdate
