@@ -13,6 +13,20 @@
                 "payload": {},
                 "environmentVariables": {}
             }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "samDemoTest:LambdaWriteToDynamoDB",
+            "invokeTarget": {
+                "target": "template",
+                "templatePath": "${workspaceFolder}/src/samDemoTest/template.yaml",
+                "logicalId": "LambdaWriteToDynamoDB"
+            },
+            "lambda": {
+                "payload": {},
+                "environmentVariables": {}
+            }
         }
     ]
 }

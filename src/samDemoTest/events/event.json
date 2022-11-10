@@ -1,37 +1,26 @@
-[
-  {
-  "accountID": "123456",
-  "name": "Mitch",
-  "transaction_type" : "Gas",
-  "vendor" : "exon",
-  "amount": "50.00"
-  },
-  {
-  "accountID": "563555",
-  "name": "Emily",
-  "transaction_type" : "Clothes",
-  "vendor" : "Macy",
-  "amount": "54.00"
-  },
-  {
-  "accountID": "678323",
-  "name": "Dante",
-  "transaction_type" : "Food",
-  "vendor" : "Sheetz",
-  "amount": "14.00"
-  },
-  {
-  "accountID": "123456",
-  "name": "Jante",
-  "transaction_type" : "Gas",
-  "vendor" : "exon",
-  "amount": "56.00"
-  },
-  {
-  "accountID": "789553",
-  "name": "Ted",
-  "transaction_type" : "Drinks",
-  "vendor" : "Tap",
-  "amount": "75.00"
-  }
-]
+{
+  "Records": [
+    {
+      "messageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
+      "receiptHandle": "MessageReceiptHandle",
+      "body": {
+        "accountId": "123477",
+        "name": "Rob",
+        "transaction_type" : "Gas",
+        "vendor" : "exon",
+        "amount": "50.00"
+      },
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1523232000000",
+        "SenderId": "123456789012",
+        "ApproximateFirstReceiveTimestamp": "1523232000001"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "{{{md5_of_body}}}",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-east-1:072065628342:eventSemOneStack-sqsToLambdaToDyno-TlO97twCPsRY",
+      "awsRegion": "us-east-1"
+    }
+  ]
+}
