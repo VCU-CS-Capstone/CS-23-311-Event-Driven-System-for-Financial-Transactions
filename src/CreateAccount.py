@@ -2,9 +2,22 @@ import json
 import boto3
 
 
+# "id": "0f2f3c91-73b4-45d1-92ec-3eca6564952e",
+#   "creditCardId": "test",
+#   "name": "test",
+#   "address": "test",
+#   "ssn": "test",
+#   "birthdate": "test",
+#   "email": "test",
+#   "phone": "test",
+#   "cardType": "",
+#   "currentBalance": 0,
+#   "previousBalance": 0,
+#   "Type": "Book New Account"
+
 def updateDynamo(Item):
     client = boto3.resource('dynamodb')
-    table = client.Table('AccountDB')
+    table = client.Table('DynamoDBTableV2')
     response = table.put_item(Item = Item)
     
 def lambda_handler(event, context):
@@ -14,31 +27,30 @@ def lambda_handler(event, context):
     print(parsed)
     id = parsed['detail']['id']
     print(id)
-    object = parsed['detail']['object']
-    address = event['detail']['address']
-    balance = event['detail']['balance']
-    created = event['detail']['created']
-    defaultSource = event['detail']['defaultSource']
-    delinquent = event['detail']['delinquent']
-    description = event['detail']['description']
-    email = event['detail']['email']
-    name = event['detail']['name']
-    phone = event['detail']['phone']
-    shipping = event['detail']['shipping']
+    creditCardId = parsed['detail']['creditCardId']
+    name = parsed['detail']['name']
+    address = parsed['detail']['address']
+    ssn = parsed['detail']['ssn']
+    birthdate = parsed['detail']['birthdate']
+    email = parsed['detail']['email']
+    phone = parsed['detail']['phone']
+    cardType = parsed['detail']['cardType']
+    currentBalance = parsed['detail']['currentBalance']
+    previousBalance = parsed['detail']['previousBalance']
+    
     
     Item = {
-        'AccountId' : id
-        'object' : object,
-        'address' : address,
-        'balance' : balance,
-        'created' : created,
-        'defaultSource' : defaultSource,
-        'delinquent' : delinquent,
-        'description' : description,
-        'email' : email,
+        'AccountId' : id,
+        'creditCardId' : creditCardId,
         'name' : name,
+        'address' : address,
+        'ssn' : ssn,
+        'birthdate' : birthdate,
+        'email' : email,
         'phone' : phone,
-        'shipping' : shipping
+        'cardType' : cardType,
+        'currentBalance' : currentBalance,
+        'previousBalance' : previousBalance
     }
     response = updateDynamo(Item)
     print(Item)
