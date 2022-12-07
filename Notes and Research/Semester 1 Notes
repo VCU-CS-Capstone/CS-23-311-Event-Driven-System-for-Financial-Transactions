@@ -1,0 +1,60 @@
+
+TEAM ACCOUNT:
+americandragonssd@gmail.com
+gmail and AWS pw: Americandragons1*
+
+Miscellaneous links and tutorial notes/ideas:
+
+https://insightsoftware.com/blog/whats-the-difference-relational-vs-non-relational-databases/
+
+Relational databases are best for structured data that is modeled well by the table model.
+Non-relational databases, on the other hand, handle unstructured data well and are best for different data structures.
+
+https://www.youtube.com/watch?v=RoKAEzdcr7k
+SQS, SNS, or EventBridge?
+
+S3:
+https://www.youtube.com/watch?v=e6w9LwZJFIA
+
+DynamoDB:
+https://www.youtube.com/watch?v=2k2GINpO308
+
+Route53:
+https://www.youtube.com/watch?v=e2xLV7pCOLI
+
+Step Functions:
+AWS Step Functions is a serverless orchestration service that lets you integrate with AWS Lambda functions 
+and other AWS services to build business-critical applications.
+Through Step Functions' graphical console, you see your application's workflow as a series of event-driven steps.
+https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/stepfunctions
+
+AWS Free tier info:
+Free tier info:
+https://aws.amazon.com/free/?sc_icontent=awssm-evergreen-free_tier&sc_iplace=2up&trk=ha_awssm-evergreen-free_tier&sc_ichannel=ha&sc_icampaign=evergreen-free_tier&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all#Learn_more_about_AWS_Free_Tier_Products
+
+Serverless land templates:
+https://www.amazon.com/Software-Architecture-Patterns-Serverless-Systems/dp/1800207034
+https://serverlessland.com/patterns/sqs-lambda-ddb-sam-java
+
+EventBridge:
+https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
+
+Amazon Web Services:
+https://aws.amazon.com/
+
+Stripe:
+https://stripe.com/
+
+Kinesis - Analytics, real time analytics works work S3 and DynamoDB instead of just putting everything in a backlog to be analyzed later
+
+Simple Queue Service (SQS) - Application Integration
+One to one, not good for multiplier services
+Polling
+Implements a queue system where publishes will publish events into the queue and the subscriber will use the queue when it wants to
+Not necessarily FIFO, but the order of access of the queue can be changed depending on how you set up the SNS in the first place
+Asynchronous message based communication that replaced API calls
+
+Simple Notification Service (SNS) - Application Integration
+PUBSUB( PUblisher and Subscriber)
+Topics) are created in order to have a particular theme (ie. payments, order..)
+
