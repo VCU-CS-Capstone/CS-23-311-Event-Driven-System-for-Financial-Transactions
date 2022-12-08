@@ -46,7 +46,7 @@ def lambda_handler(event, context):
         Item = {
                 'TransactionId' : TransactionId,
                 'CreditCardId' : creditCardId,
-                'Status' : Status,
+                'Status' : 'Posted',
                 'Merchant' : Merchant,
                 'Date' : Date,
                 'Time' : Time,
@@ -74,7 +74,7 @@ def lambda_handler(event, context):
         Item = {
                 'TransactionId' : TransactionId,
                 'CreditCardId' : creditCardId,
-                'Status' : Status,
+                'Status' : 'Declined',
                 'Merchant' : Merchant,
                 'Date' : Date,
                 'Time' : Time,
