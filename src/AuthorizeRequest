@@ -1,0 +1,55 @@
+import json
+import boto3
+import datetime
+client = boto3.client('events')
+
+def lambda_handler(event, context):
+    print(event)
+    for record in event['Records']:
+        parsed = record['dynamodb']['NewImage']
+        print(parsed)
+        value = parsed['Status']['S']
+        if value == 'Authorize':
+            
+            TransactionId = parsed['TransactionId']['S']
+            CreditCardId = parsed['CreditCardId']['S']
+            Status = parsed['Status']['S']
+            Merchant = parsed['Merchant']['S']
+            Date = parsed['Date']['S']
+            Time = parsed['Time']['S']
+            Location = parsed['Location']['S']
+            Price = parsed['Price']['S'],
+            AccountId = parsed['AccountId']['S']
+            
+            Item = {
+                'TransactionId' : TransactionId,
+                'CreditCardId' : CreditCardId,
+                'Status' : Status,
+                'Merchant' : Merchant,
+                'Date' : Date,
+                'Time' : Time,
+                'Location' : Location,
+                'Price' : Price,
+                'Type' : 'Authorization',
+                'AccountId' : AccountId
+            }
+            print(Item)
+            response = client.put_events(
+            Entries=[
+                {
+                'Time' : datetime.datetime.now(),
+                'Source' : 'Lambda Publish',
+                'Resources' : [
+                ],
+                'DetailType' : 'Custom event demo from ToEventbridge Lambda',
+                'Detail' : json.dumps(Item),
+                'EventBusName' : 'arn:aws:events:us-east-1:072065628342:event-bus/FinalEventBus',
+                'TraceHeader' : 'testdemo'
+                },
+                    ]
+                )
+       
+    # for record in event['Records']:
+    #     if record['eventName'] == 'INSERT'
+    #         print('Handling INSERT event')
+    
