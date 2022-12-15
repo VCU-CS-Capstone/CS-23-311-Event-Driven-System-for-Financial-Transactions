@@ -1,5 +1,5 @@
-# *Your Project Description*
-## *Sponsoring Company or Organization*
+# *Event Driven Architecture*
+## *Capital One*
 ## *Short Project Description*
 The directory structure in this GitHub is to allow the project to have all its resources self-contained.
 Open Source software should not just be a repository of code.  There are a number of directories to help you and others that will 
@@ -15,20 +15,12 @@ a better understanding of the problems you encountered during the developmemnt o
 
 
 ## Project Team
-17
 - *Michael Clark*  - *Capital One* - Mentor
-18
+- *Marty Bland*  - *Capital One* - Mentor
+- *Mitchell Mikulsky*  - *Capital One* - Mentor
 - *Mehul Garnara* - *Capital One* - Business Advisor
-19
 - *Krzysztof Cios* - *Chair of Department of Computer Science* - Faculty Advisor
-20
 - *Dan Tran* - *Computer Science* - Student Team Member
-21
-- *Charles Tran* - *Computer Science
-* - Student Team Member
-22
-- *Greg Johnson* - *Computer Science
-* - Student Team Member
-23
-- *Parth Kapoor* - *Computer Science
-* - Student Team Member
+- *Charles Tran* - *Computer Science* - Student Team Member
+- *Greg Johnson* - *Computer Science* - Student Team Member
+- *Parth Kapoor* - *Computer Science* - Student Team Member
