@@ -1,4 +1,4 @@
-# *Event Driven Architecture*
+# *Event Driven System for Financial Transactions*
 ## *Capital One*
 ## *Short Project Description*
 Current modern financial transaction fulfillment, and banking requires fulfillment in bulk at the end of each business day. This is a constraint that limits the flow of transactions, and results in bottlenecks and untimely business transaction fulfillments due to the monolithic and highly coupled nature of their architecture.
