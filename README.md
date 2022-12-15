@@ -13,11 +13,22 @@ a better understanding of the problems you encountered during the developmemnt o
 | Status Reports | Project management documentation - weekly reports, milestones, etc. |
 | scr | Source code - create as many subdirectories as needed |
 
+
 ## Project Team
-- *Mentor's Name*  - *Company Affliation* - Mentor
-- *Technical Advisor Name* - *Company Affliation* - Technical Advisor
-- *Faculty Advisor's Name* - *Department* - Faculty Advisor
-- *Student's Name* - *major* - Student Team Member
-- *Student's Name* - *major* - Student Team Member
-- *Student's Name* - *major* - Student Team Member
-- *Student's Name* - *major* - Student Team Member
+17
+- *Michael Clark*  - *Capital One* - Mentor
+18
+- *Mehul Garnara* - *Capital One* - Business Advisor
+19
+- *Krzysztof Cios* - *Chair of Department of Computer Science* - Faculty Advisor
+20
+- *Dan Tran* - *Computer Science* - Student Team Member
+21
+- *Charles Tran* - *Computer Science
+* - Student Team Member
+22
+- *Greg Johnson* - *Computer Science
+* - Student Team Member
+23
+- *Parth Kapoor* - *Computer Science
+* - Student Team Member
