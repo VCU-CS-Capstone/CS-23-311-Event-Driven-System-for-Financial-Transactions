@@ -1,6 +1,8 @@
 # Status Reports Folder
 Weekly/bi-weekly status reports go into this folder
 
+Trello Board (Main location for status tracking): https://trello.com/b/jjBzX2er/vcu-capstone-2022-cs-23-311-americandragons
+
 Project Plan Template: https://github.com/VCU-CS-Capstone/0000---Capstone-Template/blob/master/Status%20Reports/Project%20Plan.md
 
 Status Report Template: https://github.com/VCU-CS-Capstone/0000---Capstone-Template/blob/master/Status%20Reports/Status%20Reports.dotx
