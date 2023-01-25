@@ -9,7 +9,7 @@ def updateDynamo(Item):
 def lambda_handler(event, context):
 
     print(event)
-    parsed = json.loads(event['Records'][0]['body'])
+    parsed = json.loads(event['Records'][0]['body']) #iterate
     print(parsed)
     TransactionId = parsed['detail']['TransactionId']
     CreditCardId = parsed['detail']['CreditCardId']
@@ -23,7 +23,7 @@ def lambda_handler(event, context):
     
  
     Item = {
-        'TransactionId' : TransactionId,
+        'TransactionId' : TransactionId, #use above definitions here unless you are reusing
         'CreditCardId' : CreditCardId,
         'Status' : Status,
         'Merchant' : Merchant,
@@ -33,7 +33,7 @@ def lambda_handler(event, context):
         'Price' : Price,
         'AccountId' : AccountId
     }
-    response = updateDynamo(Item)
+    response = updateDynamo(Item) #use the response / error handling
     print(Item)
 
     
