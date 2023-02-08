@@ -15,6 +15,21 @@ transaction = {}
 
 def CreateAccount():
   cardType = input("What card would you like to choose? \n (1) American Dragon Card \n (2) Big Baller Card \n")
+  #error handling
+  notValid = True
+  if cardType == '1':
+    cardTypeString = 'American Dragon Card'
+  elif cardType == '2':
+    cardTypeString = 'Big Baller Card'
+  else:
+    while notValid:
+        userChoice = input("Incorrect choice, value must be 1 or 2")
+        if userChoice == '1':
+          cardTypeString = 'American Dragon Card'
+          notValid = False
+        elif userChoice == '2':
+          cardTypeString = 'Big Baller Card'
+          notValid = True
   cardNum = input("Whats your card id \n")
   name = input("What is your name? \n")
   ssn = input("What is you social security? \n")
@@ -22,29 +37,29 @@ def CreateAccount():
   address = input("What is your shipping address? \n")
   email = input("What is your email? \n")
   phone = input("What is your phone number?\n")
-  if cardType == '1':
-    cardTypeString = 'American Dragon Card'
-  elif cardType == '2':
-    cardTypeString = 'Big Baller Card'
   # account['id'] = str(uuid.uuid4())
-  account['id'] = '4444'
-  account['creditCardId'] = cardNum
-  account['name'] = name
-  account['address'] = address
-  account['ssn'] = ssn
-  account['birthdate'] = dob
-  account['email'] = email
-  account['phone'] = phone
-  account['cardType'] = cardTypeString
-  account['currentBalance'] = 0
-  account['previousBalance'] = 0
-  account['Type'] = "Book New Account"
+  
+  #fixed to expanded form
+  account = {
+    "id" : "4444", #still need to fix that it is hard coded
+    'creditCardId' : cardNum,
+    'name' : name,
+    'address' : address,
+    'ssn' : ssn,
+    'birthdate' : dob,
+    'email' : email,
+    'phone' : phone,
+    'cardType' : cardTypeString,
+    'currentBalance' : 0,
+    'previousBalance' : 0,
+    'Type' : "Book New Account"
+  }
   if cardType == '1':
     account['maxCredit'] = 400
   elif cardType == '2':
     account['maxCredit'] = 100000
-  
-  print(account)
+
+  print ("account: ", account)
   response = client.put_events(
         Entries=[
             {
@@ -95,26 +110,25 @@ def CreateNewTransaction():
                 ]
             )
   print(response)
-  time.sleep(15)
   Authorization(transaction['AccountId'], transaction['CreditCardId'], transaction['Price'], transaction)
 
 def Authorization(AccountId, creditCardId, costOfTransaction, transaction):
-  client2 = boto3.resource('dynamodb')
-  table = client2.Table('AccountDB')
-  response = table.get_item(Key={'AccountId': AccountId, 'creditCardId' : creditCardId })
+  DynamoDB = boto3.resource('dynamodb')
+  AccountDbTable = DynamoDB.Table('AccountDB')
+  response = AccountDbTable.get_item(Key={'AccountId': AccountId, 'creditCardId' : creditCardId })
   entry=response['Item']
+
   currentBalance = float(entry['currentBalance'])
   maxCredit = float(entry['maxCredit'])
   cost = float(transaction['Price'])
-  if currentBalance + cost< maxCredit:
+  if currentBalance + cost<= maxCredit:
     MerchentFunded = input("Press a key to fund merchant\n")
     fund(transaction)
   else:
     print("Insufficent Balance")
 
 def fund(transaction):
-  print('price is')
-  print(transaction['Price'])
+  print('price is', transaction['Price'])
   client4 = boto3.client('events')
   Item = {
     'TransactionId' : transaction['TransactionId'],
@@ -147,9 +161,19 @@ def fund(transaction):
 
 choice = input("What would you like to do \n (1) Create a new Account \n (2) Make a new Transaction \n")
 
+notValid = True
 if choice == '1':
   CreateAccount()
-if choice == '2':
+elif choice == '2':
   CreateNewTransaction()
+else:
+  while notValid:
+    choice = input("Incorrect choice, value must be 1 or 2")
+    if choice == '1':
+      CreateAccount()
+      notValid = False
+    elif choice == '2':
+      CreateNewTransaction()
+      notValid = False
 
 
