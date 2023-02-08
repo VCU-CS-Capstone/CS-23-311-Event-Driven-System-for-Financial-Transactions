@@ -1,17 +1,17 @@
-import json
+import json     #Rename files to be .py files
 import boto3
 from boto3.dynamodb.conditions import Key
 import datetime
-
-client = boto3.resource('dynamodb')
-client2 = boto3.client('events')
+#** Best practice is to use snake case for function and variable definition
+client = boto3.resource('dynamodb') #Be clear with variable definititions 
+client2 = boto3.client('events') 
 table = client.Table('AccountDB')
 
 
-def updateDynamo(Item):
+def updateDynamo(Item): #Be consistent with case of 
     client = boto3.resource('dynamodb')
     table = client.Table('AccountDB')
-    response = table.put_item(Item = Item)
+    response = table.put_item(Item = Item) #Response isn't used
 
 def lambda_handler(event, context):
     
@@ -21,9 +21,9 @@ def lambda_handler(event, context):
     # "Type":"Authorization","AccountId":"4444"}}'
     
     print(event)
-    parsed = json.loads(event['Records'][0]['body'])
-    print(parsed)
-    AccountId = parsed['detail']['AccountId']
+    parsed = json.loads(event['Records'][0]['body']) #Iterate through all records?
+    print(parsed)   
+    AccountId = parsed['detail']['AccountId']   #Case convention
     creditCardId = parsed['detail']['CreditCardId']
     TransactionId = parsed['detail']['AccountId']
     Status = parsed['detail']['Status']
@@ -33,7 +33,7 @@ def lambda_handler(event, context):
     Location = parsed['detail']['CreditCardId']
     PayloadPrice = parsed['detail']['Price']
 
-    Price = float(parsed['detail']['Price'][0])
+    Price = float(parsed['detail']['Price'][0]) #
     print(Price)
     response = table.get_item(Key={'AccountId': AccountId, 'creditCardId' : creditCardId })
     entry = response['Item']

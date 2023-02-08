@@ -1,4 +1,4 @@
-import json
+import json #use .py extension 
 import boto3
 import datetime
 client = boto3.client('events')
@@ -8,10 +8,10 @@ def lambda_handler(event, context):
     for record in event['Records']:
         parsed = record['dynamodb']['NewImage']
         print(parsed)
-        value = parsed['Status']['S']
+        value = parsed['Status']['S'] #What value? Use clear variable names
         if value == 'Authorize':
             
-            TransactionId = parsed['TransactionId']['S']
+            TransactionId = parsed['TransactionId']['S'] #Update to use json type structure
             CreditCardId = parsed['CreditCardId']['S']
             Status = parsed['Status']['S']
             Merchant = parsed['Merchant']['S']
@@ -34,7 +34,7 @@ def lambda_handler(event, context):
                 'AccountId' : AccountId
             }
             print(Item)
-            response = client.put_events(
+            response = client.put_events( #Use response? Error or no error? 
             Entries=[
                 {
                 'Time' : datetime.datetime.now(),

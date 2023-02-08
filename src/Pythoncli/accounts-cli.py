@@ -7,7 +7,7 @@ import uuid
 import time
 from datetime import datetime
 
-print(datetime.now())
+print(datetime.now()) #
 client = boto3.client('events')
 
 account = {}
@@ -25,9 +25,9 @@ def CreateAccount():
   if cardType == '1':
     cardTypeString = 'American Dragon Card'
   elif cardType == '2':
-    cardTypeString = 'Big Baller Card'
-  # account['id'] = str(uuid.uuid4())
-  account['id'] = '4444'
+    cardTypeString = 'Big Baller Card' #Error handling for other card types? 
+  # account['id'] = str(uuid.uuid4()) #Use an expanded form for setting the account variable (see below)
+  account['id'] = '4444' #Can this not be hardcoded? Use .env or maybe lookup the account in Dyanmo?
   account['creditCardId'] = cardNum
   account['name'] = name
   account['address'] = address
@@ -44,7 +44,7 @@ def CreateAccount():
   elif cardType == '2':
     account['maxCredit'] = 100000
   
-  print(account)
+  print(account) #Can add statement before print print("account:", account)
   response = client.put_events(
         Entries=[
             {
@@ -95,28 +95,28 @@ def CreateNewTransaction():
                 ]
             )
   print(response)
-  time.sleep(15)
+  time.sleep(15) #Why is sleep needed here? 
   Authorization(transaction['AccountId'], transaction['CreditCardId'], transaction['Price'], transaction)
 
 def Authorization(AccountId, creditCardId, costOfTransaction, transaction):
-  client2 = boto3.resource('dynamodb')
-  table = client2.Table('AccountDB')
+  client2 = boto3.resource('dynamodb') #Use semantic naming, not client2 so you know what it is
+  table = client2.Table('AccountDB') #same as above
   response = table.get_item(Key={'AccountId': AccountId, 'creditCardId' : creditCardId })
   entry=response['Item']
-  currentBalance = float(entry['currentBalance'])
+  currentBalance = float(entry['currentBalance']) #What are these values if you don't cast them as float?
   maxCredit = float(entry['maxCredit'])
   cost = float(transaction['Price'])
-  if currentBalance + cost< maxCredit:
+  if currentBalance + cost< maxCredit: #What if it is equal?
     MerchentFunded = input("Press a key to fund merchant\n")
     fund(transaction)
   else:
     print("Insufficent Balance")
 
 def fund(transaction):
-  print('price is')
+  print('price is')#Combine print statements
   print(transaction['Price'])
   client4 = boto3.client('events')
-  Item = {
+  Item = { #This sytax is good!
     'TransactionId' : transaction['TransactionId'],
     'CreditCardId' : transaction['CreditCardId'],
     'Status' : 'Merchent Funded',
@@ -149,7 +149,15 @@ choice = input("What would you like to do \n (1) Create a new Account \n (2) Mak
 
 if choice == '1':
   CreateAccount()
-if choice == '2':
+if choice == '2': #Use elif, plus else
   CreateNewTransaction()
 
 
+
+
+
+#Example
+# account = {
+#   "name" = name
+#   "address" = address
+# }

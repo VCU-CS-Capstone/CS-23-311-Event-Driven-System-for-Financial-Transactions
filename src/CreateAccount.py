@@ -23,10 +23,10 @@ def updateDynamo(Item):
 def lambda_handler(event, context):
 
     print(event)
-    parsed = json.loads(event['Records'][0]['body'])
+    parsed = json.loads(event['Records'][0]['body']) #Don't hardcode 
     print(parsed)
     id = parsed['detail']['id']
-    print(id)
+    print(id) 
     creditCardId = parsed['detail']['creditCardId']
     name = parsed['detail']['name']
     address = parsed['detail']['address']
@@ -52,10 +52,10 @@ def lambda_handler(event, context):
         'currentBalance' : currentBalance,
         'previousBalance' : previousBalance
     }
-    response = updateDynamo(Item)
+    response = updateDynamo(Item) #Does the response provide any value? 
     print(Item)
-    print (Item)
-    return {
+    print (Item) #Duplicate
+    return { #What about errors?
         'statusCode': 200,
         'body': json.dumps('Db added!')
     }
