@@ -5,6 +5,7 @@ import datetime
 client = boto3.client('events')
 
 def lambda_handler(event, context):
+    print(event)
     response = client.put_events(
         Entries=[
             {
