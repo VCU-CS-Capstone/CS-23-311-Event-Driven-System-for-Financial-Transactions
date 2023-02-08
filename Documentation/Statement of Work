@@ -1,0 +1,25 @@
+Short description of the project, description of Current state, value, business requirements:
+
+Description of project:
+Build an AWS cloud-based system for processing financial transactions built with event driven software components they create.
+
+Current state:
+Command line interface built in order to initiate events.
+Finalized architecture (for this semester) complete - CapitalOne mentors and us have discussed making even more improvements and minor tweaks.
+Pipelines using AWS to book account and process transactions. Producers and consumers defined, event bus defined, event rules defined.
+
+Value:
+Currently, financial transactions in modern day are fulfilled in bulk at the end of the way, this can be inneficient and cause issues.
+The value of having an event driven architecture in processing financial transactions is eliminating these hiccups in transaction,
+and improving upon it. This architecture, once implemented would say for example, in real time, update balances and ledgers in order 
+to reflect transactions instead of waiting and lagging behind until the day is over. Authentification and verification would be more 
+robust.
+
+Business requirements (sem1):
+Build an event driven system that allows mainly 2 things:
+1) Booking account
+Users should be able to choose different cards they want and make an account. Different cards can have different benefits.
+2) Process transaction 
+We want to be able to process transactions initiated by customers using their accounts. Authorization/authentification needs to occur
+
+

@@ -1,0 +1,102 @@
+import json     #Rename files to be .py files
+import boto3
+from boto3.dynamodb.conditions import Key
+import datetime
+#** Best practice is to use snake case for function and variable definition
+client = boto3.resource('dynamodb') #Be clear with variable definititions 
+client2 = boto3.client('events') 
+table = client.Table('AccountDB')
+
+
+def updateDynamo(Item): #Be consistent with case of 
+    client = boto3.resource('dynamodb')
+    table = client.Table('AccountDB')
+    response = table.put_item(Item = Item) #Response isn't used
+
+def lambda_handler(event, context):
+    
+    
+    #  "detail":{"TransactionId":"e1443223-0eab-41ca-9805-68ad34b64b11","CreditCardId":"666677778888","Status":"Authorize",
+    # "Merchant":"target","Date":"2022-12-07 17:52:18.530437","Time":"Time will be fixed","Location":"now","Price":["90.00"],
+    # "Type":"Authorization","AccountId":"4444"}}'
+    
+    print(event)
+    parsed = json.loads(event['Records'][0]['body']) #Iterate through all records?
+    print(parsed)   
+    AccountId = parsed['detail']['AccountId']   #Case convention
+    creditCardId = parsed['detail']['CreditCardId']
+    TransactionId = parsed['detail']['AccountId']
+    Status = parsed['detail']['Status']
+    Merchant = parsed['detail']['Merchant']
+    Date = parsed['detail']['Date']
+    Time = parsed['detail']['Time']
+    Location = parsed['detail']['CreditCardId']
+    PayloadPrice = parsed['detail']['Price']
+
+    Price = float(parsed['detail']['Price'][0]) #
+    print(Price)
+    response = table.get_item(Key={'AccountId': AccountId, 'creditCardId' : creditCardId })
+    entry = response['Item']
+    print(entry)
+    
+    PreviousBalance = float(entry['previousBalance'])
+    MaxCredit = float(entry['maxCredit'])
+    
+    if PreviousBalance + Price < MaxCredit:
+        Item = {
+                'TransactionId' : TransactionId,
+                'CreditCardId' : creditCardId,
+                'Status' : 'Posted',
+                'Merchant' : Merchant,
+                'Date' : Date,
+                'Time' : Time,
+                'Location' : Location,
+                'Price' : PayloadPrice,
+                'Type' : 'Approved',
+                'AccountId' : AccountId
+            }
+        response = client2.put_events(
+        Entries=[
+            {
+            'Time' : datetime.datetime.now(),
+            'Source' : 'Lambda Publish',
+            'Resources' : [
+            ],
+            'DetailType' : 'Custom event demo from ToEventbridge Lambda',
+            'Detail' : json.dumps(Item),
+            'EventBusName' : 'arn:aws:events:us-east-1:072065628342:event-bus/FinalEventBus',
+            'TraceHeader' : 'testdemo'
+            },
+                ]
+            )
+        print ('Sufficient')
+    else:
+        Item = {
+                'TransactionId' : TransactionId,
+                'CreditCardId' : creditCardId,
+                'Status' : 'Declined',
+                'Merchant' : Merchant,
+                'Date' : Date,
+                'Time' : Time,
+                'Location' : Location,
+                'Price' : PayloadPrice,
+                'Type' : 'Declined',
+                'AccountId' : AccountId
+            }
+        response = client2.put_events(
+        Entries=[
+            {
+            'Time' : datetime.datetime.now(),
+            'Source' : 'Lambda Publish',
+            'Resources' : [
+            ],
+            'DetailType' : 'Custom event demo from ToEventbridge Lambda',
+            'Detail' : json.dumps(Item),
+            'EventBusName' : 'arn:aws:events:us-east-1:072065628342:event-bus/FinalEventBus',
+            'TraceHeader' : 'testdemo'
+            },
+                ]
+            )
+        print("Insufficient")
+    
+    return 

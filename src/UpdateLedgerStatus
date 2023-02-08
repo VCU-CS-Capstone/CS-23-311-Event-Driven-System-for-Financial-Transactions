@@ -1,0 +1,39 @@
+import json
+import boto3
+
+def updateDynamo(Item):
+    client = boto3.resource('dynamodb')
+    table = client.Table('TransactionDB')
+    response = table.put_item(Item = Item)
+    
+def lambda_handler(event, context):
+
+    print(event)
+    parsed = json.loads(event['Records'][0]['body']) #iterate
+    print(parsed)
+    TransactionId = parsed['detail']['TransactionId']
+    CreditCardId = parsed['detail']['CreditCardId']
+    Status = parsed['detail']['Status']
+    Merchant = parsed['detail']['Merchant']
+    Date = parsed['detail']['Date']
+    Time = parsed['detail']['Time']
+    Location = parsed['detail']['Location']
+    Price = parsed['detail']['Price'][0]
+    AccountId = parsed['detail']['AccountId']
+    
+ 
+    Item = {
+        'TransactionId' : TransactionId, #use above definitions here unless you are reusing
+        'CreditCardId' : CreditCardId,
+        'Status' : Status,
+        'Merchant' : Merchant,
+        'Date' : Date,
+        'Time' : Time,
+        'Location' : Location,
+        'Price' : Price,
+        'AccountId' : AccountId
+    }
+    response = updateDynamo(Item) #use the response / error handling
+    print(Item)
+
+    

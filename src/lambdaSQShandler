@@ -1,4 +1,6 @@
-const AWS = require('aws-sdk');
+const AWS = require('aws-sdk');  //Name .js file
+
+//! Good comments, 
 
 //SQS input follows format {"user_id":"user_2","device":"brick","location":"antarctica"}
 
@@ -35,11 +37,11 @@ exports.handler = async (event) => {
       };
       
       //write data to dynamo DB:
-      await dynamoDB.put(params).promise();
+      await dynamoDB.put(params).promise(); //Do you need to resolve the promise and process it to see if success or failure? 
       
       //success logging to cloudwatch:
       console.log('Successfully written to DynamoDB');
-  }catch(error){
+  }catch(error){ // Good error handling
       //error handling
       console.error('Error in executing lambda handler for SQS',error);
       return;
